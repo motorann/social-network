@@ -1,0 +1,8 @@
+.header {
+  grid-area: header-section;
+  background-color: orange;
+}
+
+.header .logo {
+  width: 3rem;
+}

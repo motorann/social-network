@@ -1,0 +1,12 @@
+.navbar {
+  grid-area: nav-section;
+  background-color: red;
+}
+
+.navbar ul {
+  list-style: none;
+}
+
+.navbar a {
+  text-decoration: none;
+}
