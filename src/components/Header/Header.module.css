@@ -1,8 +1,12 @@
 .header {
   grid-area: header-section;
-  background-color: orange;
+  background-color: hsl(50, 100%, 92%);
 }
 
 .header .logo {
-  width: 3rem;
+  width: 5rem;
+}
+
+.icon_bar:hover {
+  color: #a4d0a4;
 }
