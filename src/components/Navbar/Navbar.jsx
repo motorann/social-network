@@ -2,8 +2,8 @@ import styles from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faUserVneck,
-  faMessages,
+  faUser,
+  faMessage,
   faNewspaper,
   faMusic,
   faGear,
@@ -14,11 +14,11 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <ul>
         <li>
-          <FontAwesomeIcon icon={faUserVneck} />
+          <FontAwesomeIcon icon={faUser} />
           <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
-          <FontAwesomeIcon icon={faMessages} />
+          <FontAwesomeIcon icon={faMessage} />
           <NavLink to="/dialogs">Messages</NavLink>
         </li>
         <li>
