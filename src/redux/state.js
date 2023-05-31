@@ -5,7 +5,6 @@ let state = {
       { id: 2, message: 'kek2', likes: 5 },
       { id: 3, message: 'kek3', likes: 3 },
       { id: 4, message: 'kek4', likes: 12 },
-      { id: 5, message: 'kek5', likes: 9 },
     ],
   },
   dialogsPage: {
@@ -23,6 +22,24 @@ let state = {
       { id: 4, message: 'I am fine' },
     ],
   },
+};
+
+export let addPost = (newPostMessage) => {
+  let newPost = {
+    id: 5,
+    message: newPostMessage,
+    likes: 0,
+  };
+  state.profilePage.posts.push(newPost);
+};
+
+export let addMessage = (newDialogMessage) => {
+  let newMessage = {
+    id: 5,
+    message: newDialogMessage,
+  };
+
+  state.dialogsPage.messages.push(newMessage);
 };
 
 export default state;
