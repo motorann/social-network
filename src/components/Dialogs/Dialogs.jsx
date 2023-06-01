@@ -15,8 +15,10 @@ const Dialogs = (props) => {
     <div className={styles.grid_wrapper}>
       <DialogSection data={props.state.dialogs} />
       <MessageSection
-        data={props.state.messages}
+        stateMessages={props.state.messages}
+        newMessageText={props.state.newMessageText}
         addMessage={props.addMessage}
+        updateNewMessageText={props.updateNewMessageText}
       />
     </div>
   );

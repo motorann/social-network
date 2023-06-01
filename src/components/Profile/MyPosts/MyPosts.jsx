@@ -3,23 +3,31 @@ import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-  let postsElements = props.data.map((data) => (
+  console.log(props);
+  let postsElements = props.posts.map((data) => (
     <Post key={data.id} message={data.message} likes={data.likes} />
   ));
 
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    let newPostMessage = newPostElement.current.value;
-    props.addPost(newPostMessage);
-    newPostElement.current.value = '';
+    props.addPost();
+  };
+
+  let changePostText = () => {
+    let text = newPostElement.current.value;
+    props.updateNewPostText(text);
   };
 
   return (
     <div>
       My posts
       <div>
-        <textarea ref={newPostElement}></textarea>
+        <textarea
+          ref={newPostElement}
+          onChange={changePostText}
+          value={props.newPostText}
+        />
         <button onClick={addPost}>Add New Post</button>
         <button>Remove New Post</button>
       </div>

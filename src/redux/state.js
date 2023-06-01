@@ -1,3 +1,4 @@
+//create global state
 let state = {
   profilePage: {
     posts: [
@@ -6,6 +7,7 @@ let state = {
       { id: 3, message: 'kek3', likes: 3 },
       { id: 4, message: 'kek4', likes: 12 },
     ],
+    newPostText: '',
   },
   dialogsPage: {
     dialogs: [
@@ -21,25 +23,51 @@ let state = {
       { id: 3, message: 'How are you?' },
       { id: 4, message: 'I am fine' },
     ],
+    newMessageText: '',
   },
 };
 
-export let addPost = (newPostMessage) => {
+// rerender App when every change
+let rerenderEntireTree;
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
+};
+
+// for Profile section
+
+export const addPost = () => {
   let newPost = {
     id: 5,
-    message: newPostMessage,
+    message: state.profilePage.newPostText,
     likes: 0,
   };
   state.profilePage.posts.push(newPost);
+  updateNewPostText('');
+  rerenderEntireTree(state);
 };
 
-export let addMessage = (newDialogMessage) => {
+export const updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
+};
+
+//for Dialogs section
+
+export const addMessage = () => {
   let newMessage = {
     id: 5,
-    message: newDialogMessage,
+    message: state.dialogsPage.newMessageText,
   };
 
   state.dialogsPage.messages.push(newMessage);
+  updateNewMessageText('');
+  rerenderEntireTree(state);
+};
+
+export const updateNewMessageText = (newText) => {
+  state.dialogsPage.newMessageText = newText;
+  rerenderEntireTree(state);
 };
 
 export default state;
