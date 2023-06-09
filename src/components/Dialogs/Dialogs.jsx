@@ -13,12 +13,13 @@ const Dialogs = (props) => {
 
   return (
     <div className={styles.grid_wrapper}>
-      <DialogSection data={props.state.dialogs} />
+      <DialogSection data={props.stateDialogs.dialogs} />
       <MessageSection
-        stateMessages={props.state.messages}
-        newMessageText={props.state.newMessageText}
-        addMessage={props.addMessage}
-        updateNewMessageText={props.updateNewMessageText}
+        stateMessages={props.stateDialogs.messages}
+        newMessageText={props.stateDialogs.newMessageText}
+        /* addMessage={props.addMessage}
+        updateNewMessageText={props.updateNewMessageText} */
+        dispatch={props.dispatch}
       />
     </div>
   );

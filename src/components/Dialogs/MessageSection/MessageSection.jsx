@@ -1,6 +1,10 @@
 import React from 'react';
 import styles from './MessageSection.module.css';
 import MessageItem from './MessageItem/MessageItem';
+import {
+  addMessageActionCreator,
+  updateNewMessageTextActionCreator,
+} from '../../../redux/state';
 
 const MessageSection = (props) => {
   let messagesItems = props.stateMessages.map((data) => (
@@ -10,12 +14,15 @@ const MessageSection = (props) => {
   let newMessageElement = React.createRef();
 
   let addMessage = () => {
-    props.addMessage();
+    //props.addMessage();
+    props.dispatch(addMessageActionCreator());
   };
 
   let changeMessageText = () => {
     let currentText = newMessageElement.current.value;
-    props.updateNewMessageText(currentText);
+    // props.updateNewMessageText(currentText);
+    let action = updateNewMessageTextActionCreator(currentText);
+    props.dispatch(action);
   };
 
   return (

@@ -1,5 +1,119 @@
-//create global state
-let state = {
+//create global const, store and state
+
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
+let store = {
+  _state: {
+    profilePage: {
+      posts: [
+        { id: 1, message: 'kek1', likes: 15 },
+        { id: 2, message: 'kek2', likes: 5 },
+        { id: 3, message: 'kek3', likes: 3 },
+        { id: 4, message: 'kek4', likes: 12 },
+      ],
+      newPostText: '',
+    },
+    dialogsPage: {
+      dialogs: [
+        { id: 1, name: 'Anna' },
+        { id: 2, name: 'Katherine' },
+        { id: 3, name: 'Alex' },
+        { id: 4, name: 'Ben' },
+        { id: 5, name: 'Bill' },
+      ],
+      messages: [
+        { id: 1, message: "Hello, what's your name?" },
+        { id: 2, message: 'I am Katherine' },
+        { id: 3, message: 'How are you?' },
+        { id: 4, message: 'I am fine' },
+      ],
+      newMessageText: '',
+    },
+  },
+
+  getState() {
+    return this._state;
+  },
+
+  _callSubscriber() {
+    console.log('State changed');
+  },
+
+  subscribe(observer) {
+    this._callSubscriber = observer;
+  },
+
+  dispatch(action) {
+    switch (action.type) {
+      case ADD_POST:
+        this.addPost();
+        break;
+      case UPDATE_NEW_POST_TEXT:
+        this.updateNewPostText(action.newText);
+        break;
+      case ADD_MESSAGE:
+        this.addMessage();
+        break;
+      case UPDATE_NEW_MESSAGE_TEXT:
+        this.updateNewMessageText(action.newText);
+        break;
+      default:
+        break;
+    }
+  },
+
+  addPost() {
+    let newPost = {
+      id: 5,
+      message: this._state.profilePage.newPostText,
+      likes: 0,
+    };
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._callSubscriber(this._state);
+  },
+
+  updateNewPostText(newText) {
+    this._state.profilePage.newPostText = newText;
+    this._callSubscriber(this._state);
+  },
+
+  addMessage() {
+    let newMessage = {
+      id: 5,
+      message: this._state.dialogsPage.newMessageText,
+    };
+
+    this._state.dialogsPage.messages.push(newMessage);
+    this._state.dialogsPage.newMessageText = '';
+    this._callSubscriber(this._state);
+  },
+
+  updateNewMessageText(newText) {
+    this._state.dialogsPage.newMessageText = newText;
+    this._callSubscriber(this._state);
+  },
+};
+
+export const addPostActionCreator = () => ({ type: 'ADD-POST' });
+export const updateNewPostTextActionCreator = (newText) => ({
+  type: 'UPDATE-NEW-POST-TEXT',
+  newText: newText,
+});
+export const addMessageActionCreator = () => ({ type: 'ADD-MESSAGE' });
+export const updateNewMessageTextActionCreator = (newText) => ({
+  type: 'UPDATE-NEW-MESSAGE-TEXT',
+  newText: newText,
+});
+
+export default store;
+
+//old version
+
+/* let state = {
   profilePage: {
     posts: [
       { id: 1, message: 'kek1', likes: 15 },
@@ -70,4 +184,5 @@ export const updateNewMessageText = (newText) => {
   rerenderEntireTree(state);
 };
 
-export default state;
+// export default state;
+ */
