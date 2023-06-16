@@ -23,10 +23,11 @@ const App = (props) => {
               path="/profile/*"
               element={
                 <Profile
-                  stateProfile={props.state.profilePage}
+                  store={props.store}
+                  // stateProfile={props.state.profilePage}
                   /* addPost={props.addPost}
                   updateNewPostText={props.updateNewPostText} */
-                  dispatch={props.dispatch}
+                  // dispatch={props.dispatch}
                 />
               }
             />
@@ -34,6 +35,7 @@ const App = (props) => {
               path="/dialogs/*"
               element={
                 <Dialogs
+                  store={props.store}
                   stateDialogs={props.state.dialogsPage}
                   /* addMessage={props.addMessage}
                   updateNewMessageText={props.updateNewMessageText} */

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+import store from './redux/reduxStore';
+//import store from './redux/store';
 /*  import state from './redux/state';
  import {
   addPost,
@@ -15,10 +16,11 @@ import { subscribe } from './redux/state';
  */
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = () => {
   root.render(
     <React.StrictMode>
       <App
+        store={store}
         /*  state={state} */
         /*  addPost={addPost} */
         /*  updateNewPostText={updateNewPostText} */

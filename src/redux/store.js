@@ -1,9 +1,8 @@
 //create global const, store and state
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import dialogsReducer from './dialogsReducer';
+import profileReducer from './profileReducer';
+import sidebarReducer from './sidebarReducer';
 
 let store = {
   _state: {
@@ -32,6 +31,7 @@ let store = {
       ],
       newMessageText: '',
     },
+    sidebar: {},
   },
 
   getState() {
@@ -47,7 +47,11 @@ let store = {
   },
 
   dispatch(action) {
-    switch (action.type) {
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+    this._callSubscriber(this._state);
+    /* switch (action.type) {
       case ADD_POST:
         this.addPost();
         break;
@@ -62,10 +66,10 @@ let store = {
         break;
       default:
         break;
-    }
+    } */
   },
 
-  addPost() {
+  /* addPost() {
     let newPost = {
       id: 5,
       message: this._state.profilePage.newPostText,
@@ -74,14 +78,14 @@ let store = {
     this._state.profilePage.posts.push(newPost);
     this._state.profilePage.newPostText = '';
     this._callSubscriber(this._state);
-  },
+  }, */
 
-  updateNewPostText(newText) {
+  /*  updateNewPostText(newText) {
     this._state.profilePage.newPostText = newText;
     this._callSubscriber(this._state);
-  },
+  }, */
 
-  addMessage() {
+  /* addMessage() {
     let newMessage = {
       id: 5,
       message: this._state.dialogsPage.newMessageText,
@@ -95,10 +99,10 @@ let store = {
   updateNewMessageText(newText) {
     this._state.dialogsPage.newMessageText = newText;
     this._callSubscriber(this._state);
-  },
+  }, */
 };
 
-export const addPostActionCreator = () => ({ type: 'ADD-POST' });
+/* export const addPostActionCreator = () => ({ type: 'ADD-POST' });
 export const updateNewPostTextActionCreator = (newText) => ({
   type: 'UPDATE-NEW-POST-TEXT',
   newText: newText,
@@ -107,11 +111,16 @@ export const addMessageActionCreator = () => ({ type: 'ADD-MESSAGE' });
 export const updateNewMessageTextActionCreator = (newText) => ({
   type: 'UPDATE-NEW-MESSAGE-TEXT',
   newText: newText,
-});
+}); */
 
 export default store;
 
 //old version
+
+/* const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'; */
+/* const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'; */
 
 /* let state = {
   profilePage: {

@@ -4,36 +4,34 @@ import MessageItem from './MessageItem/MessageItem';
 import {
   addMessageActionCreator,
   updateNewMessageTextActionCreator,
-} from '../../../redux/state';
+} from '../../../redux/dialogsReducer';
 
 const MessageSection = (props) => {
-  let messagesItems = props.stateMessages.map((data) => (
-    <MessageItem message={data.message} key={data.id} />
+  let messagesItems = props.messages.map((message) => (
+    <MessageItem message={message.message} key={message.id} />
   ));
 
   let newMessageElement = React.createRef();
 
-  let addMessage = () => {
-    //props.addMessage();
-    props.dispatch(addMessageActionCreator());
+  let onAddMessage = () => {
+    props.addMessage();
   };
 
-  let changeMessageText = () => {
+  let onChangeMessageText = () => {
     let currentText = newMessageElement.current.value;
     // props.updateNewMessageText(currentText);
-    let action = updateNewMessageTextActionCreator(currentText);
-    props.dispatch(action);
+    props.updateNewMessageText(currentText);
   };
 
   return (
     <div>
       <div className={styles.messages}>{messagesItems}</div>
       <textarea
-        onChange={changeMessageText}
+        onChange={onChangeMessageText}
         ref={newMessageElement}
         value={props.newMessageText}
       ></textarea>
-      <button onClick={addMessage}>Add message</button>
+      <button onClick={onAddMessage}>Add message</button>
     </div>
   );
 };
